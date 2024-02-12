@@ -1,0 +1,17 @@
+{
+  "name": "block-tech2024",
+  "version": "1.0.0",
+  "description": "Project voor school",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "school"
+  ],
+  "author": "Liam van Bart",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
