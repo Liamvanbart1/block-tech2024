@@ -4,7 +4,7 @@
   "description": "Project voor school",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js"
   },
   "keywords": [
     "school"
@@ -12,6 +12,10 @@
   "author": "Liam van Bart",
   "license": "MIT",
   "dependencies": {
+    "ejs": "^3.1.9",
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
   }
 }
