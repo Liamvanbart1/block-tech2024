@@ -35,7 +35,7 @@ async function run() {
 run().catch(console.dir);
 
 
-const collection = client.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION);
+
 // Einde Mongo DB
 
 
@@ -60,6 +60,11 @@ app.get('/register', (req, res) => {
 app.get('/base', (req, res) => {
   res.render('base');
 });
+
+
+// Gebruiker aanmaken in database eerste versie // 
+
+const collection = client.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION);
 
 app.post('/base', async (req, res) => {
   console.log(req.body);
