@@ -8,16 +8,22 @@
 </head>
 <body>
     <h1>
-        Test!
+        Deze data gaat de database in!
     </h1>
-    <h2>
-        Pannenkoek
-    </h2>
     <section>
-        <h3>
-            Inloggen Test
-        </h3>
-        
+        <form method="post" action="/home">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password</label>
+            <input type="text" id="Password" name="password" required>
+            <input type="submit" placeholder="Verzenden"></input>
+        </form>
+    </section>
+    <section>
+        <h2>
+            Ga naar de database data 
+            <a href="/data">hier</a>
+        </h2>
     </section>
 </body>
 </html>

@@ -35,6 +35,11 @@ async function run() {
 run().catch(console.dir);
 
 
+// Database en collection aanmaken
+
+const collection = client.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION);
+const collectionkunst = client.db(process.env.DB_NAMEKUNST).collection(process.env.DB_COLLECTIONKUNST);
+
 
 // Einde Mongo DB
 
@@ -50,11 +55,11 @@ app.use(express.static('static'));
 // Routes 
 
 app.get('/', (req, res) => {
-  res.render('home');
-})
+  res.render('welkom');
+});
 
-app.get('/register', (req, res) => {
-  res.send('Registratiepagina');
+app.get('/home', (req, res) => {
+  res.render('home');
 });
 
 app.get('/base', (req, res) => {
@@ -62,44 +67,30 @@ app.get('/base', (req, res) => {
 });
 
 
+app.get('/data', async (req, res) => {
+  const gebruikers = await collection.find().toArray();
+  res.render('data', { gebruikers });
+});
+
+app.get('/patchen', async (req, res) => {
+  const kunst = await collectionkunst.find().toArray();
+  res.render('patchen', { kunst });
+  console.log(kunst);
+});
 // Gebruiker aanmaken in database eerste versie // 
 
-const collection = client.db(process.env.DB_NAME).collection(process.env.DB_COLLECTION);
-
-app.post('/base', async (req, res) => {
-  console.log(req.body);
-
+app.post('/home', async (req, res) => {
+  
   const user = {
-    title: req.body.username,
-    plot: req.body.password
+    username: req.body.username,
+    password: req.body.password
   }
 
   await collection.insertOne(user);
+  console.log(user);
 
-
-  res.redirect('/base');
+  res.redirect('/data');
 });
-
-
-// async function run() {
-//   try {
-//     const database = client.db('sample_mflix');
-//     const movies = database.collection('movies');
-//     // Query for a movie that has the title 'Back to the Future'
-//     const query = { title: 'Back to the Future' };
-//     const movie = await movies.findOne(query);
-//     console.log(movie);
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-// run().catch(console.dir);
-
-
-
-
-
 
 
 app.listen(port, () => {
@@ -109,8 +100,7 @@ app.listen(port, () => {
 
 
 
-
-
+// Eerste versie van de API
 // api fetchen voor database aanpassen
 
 
