@@ -77,6 +77,8 @@ app.get('/patchen', async (req, res) => {
   res.render('patchen', { kunst });
   console.log(kunst);
 });
+
+
 // Gebruiker aanmaken in database eerste versie // 
 
 app.post('/home', async (req, res) => {
