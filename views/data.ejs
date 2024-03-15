@@ -18,6 +18,27 @@
                 <%= gebruiker.password %>
             </li>
             <% }); %>
+
+
+            <% for(let gebruiker of gebruikers) { %>
+                <div>
+                    <h3>User ID: <%= gebruiker._id %>
+                    </h3>
+                    <p>Name: <%= gebruiker.username %>
+                    </p>
+                    <p>Email: <%= gebruiker.password %>
+                    </p>
+                    <!-- Form for editing data -->
+                    <form action="/edit/<%= gebruiker._id %>" method="POST">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" value="<%= gebruiker.username %>"><br>
+                        <label for="password">password</label>
+                        <input type="password" id="password" name="password" value="<%= gebruiker.password %>"><br>
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
+                <hr>
+                <% } %>
     </section>
 </body>
 </html>

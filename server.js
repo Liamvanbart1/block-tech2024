@@ -8,7 +8,7 @@ const port = 3000;
 // Mongo DB 
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = process.env.DB_URI;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -70,6 +70,25 @@ app.get('/base', (req, res) => {
 app.get('/data', async (req, res) => {
   const gebruikers = await collection.find().toArray();
   res.render('data', { gebruikers });
+});
+
+app.post('/edit/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  console.log(userId);
+  const newData = req.body; // Assuming you're sending the updated data in the request body
+
+  try {
+    // Update the data in the MongoDB collection
+    await collection.updateOne({ "_id": new ObjectId(`${userId}`) }, { $set: newData });
+
+    // Redirect to the data page or send a success response
+    res.redirect('/data');
+    // or res.send('Data updated successfully');
+  } catch (error) {
+    // Handle errors
+    console.error('Error updating data:', error);
+    res.status(500).send('Error updating data');
+  }
 });
 
 app.get('/patchen', async (req, res) => {
